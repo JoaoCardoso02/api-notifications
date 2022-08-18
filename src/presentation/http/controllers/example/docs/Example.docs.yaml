@@ -1,0 +1,113 @@
+
+paths:
+  /api/v1/examples/:
+    get:
+      tags:
+        - Example
+      summary: get all examples
+      produces:
+      - application/json
+      responses:
+        201:
+          schema:
+            $ref: '#/definitions/examples'
+          description: A list of objects with user details
+    post:
+      tags:
+        - Example
+      summary: crate an example
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body to create an example
+        schema:
+          $ref: '#/definitions/createExample' 
+      responses:
+        201:
+          schema:
+            $ref: '#/definitions/example'
+          description: An object with example details
+  /api/v1/examples/{id}:
+    get:
+      tags:
+        - Example
+      summary: get one example by id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: number
+        required: true
+      responses:
+        201:
+          schema:
+            $ref: '#/definitions/example'
+          description: An object with user details
+    patch:
+      tags:
+        - Example
+      summary: update an example by id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: number
+        required: true
+      - in: body
+        name: body to update an example
+        schema:
+          $ref: '#/definitions/createExample'
+      responses:
+        201:
+          schema:
+            $ref: '#/definitions/example'
+          description: An object with user details updated
+    delete:
+      tags:
+        - Example
+      summary: delete an example by id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: number
+        required: true
+      responses:
+        204:
+          description: The example was deleted successfully
+definitions:
+  example:
+    type: object
+    properties:
+      name:
+        type: string
+        example: John Doe
+      age:
+        type: number
+        example: 20
+      id:
+        type: number
+        example: 1
+  examples:
+    type: array
+    items:
+      type: object
+      properties:
+        schema:
+          $ref: '#/definitions/example'
+  createExample:
+    type: object
+    properties:
+      name:
+        type: string
+        example: John Doe
+      age:
+        type: number
+        example: 20
